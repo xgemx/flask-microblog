@@ -9,7 +9,7 @@
         <tr>
             <td>Your nickname:</td>
             <td>
-                {{form.nickname(size = 24)}}
+                {{form.nickname(size = 24,class="form-control")}}
                 {% for error in form.errors.nickname %}
                 <br><span style="color: red;">[{{error}}]</span>
                 {% endfor %}
@@ -17,11 +17,11 @@
         </tr>
         <tr>
             <td>About yourself:</td>
-            <td>{{form.about_me(cols = 32, rows = 4)}}</td>
+            <td>{{form.about_me(cols = 32, rows = 4,class="form-control")}}</td>
         </tr>
         <tr>
             <td></td>
-            <td><input type="submit" value="Save Changes"></td>
+            <td><input type="submit"  class="btn btn-primary" value="Save Changes"></td>
         </tr>
     </table>
 </form>

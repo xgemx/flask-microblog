@@ -23,9 +23,15 @@
 </table>
 <hr>
 <!-- posts is a Paginate object -->
+<div class="row">
 {% for post in posts.items %}
     {% include 'post.html' %}
 {% endfor %}
-{% if posts.has_prev %}<a href="{{ url_for('user', nickname = user.nickname, page = posts.prev_num) }}"><< Newer posts</a>{% else %}<< Newer posts{% endif %} | 
-{% if posts.has_next %}<a href="{{ url_for('user', nickname = user.nickname, page = posts.next_num) }}">Older posts >></a>{% else %}Older posts >>{% endif %}
+</div>
+<nav>
+  <ul class="pager">
+    <li>{% if posts.has_prev %}<a href="{{ url_for('user', nickname = user.nickname, page = posts.prev_num) }}">Next</a>{% else %}Next{% endif %}</li>
+    <li>{% if posts.has_next %}<a href="{{ url_for('user', nickname = user.nickname, page = posts.next_num) }}">Previous</a>{% else %}Previous{% endif %}</li>
+  </ul>
+</nav>
 {% endblock %}

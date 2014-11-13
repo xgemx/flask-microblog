@@ -5,29 +5,39 @@
 <h1>Hi, {{g.user.nickname}}!</h1>
 <form action="" method="post" name="post">
     {{form.hidden_tag()}}
-    <table>
-        <tr>
-            <td>Say something:</td>
-            <td>{{ form.post(size = 30, maxlength = 140) }}</td>
-            <td>
+    <div class="form-group">
+        Say something:
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-0">
+                <div class="input-group">
+                    {{form.hidden_tag()}}
+                    {{ form.post(size = 30, maxlength = 140,class="form-control") }}
+                    <span class="input-group-btn">
+                        <input type="submit" class="btn btn-primary" value="Post">
+                    </span>
+                </div>
+            </div>               
             {% for error in form.errors.post %}
-            <span style="color: red;">[{{error}}]</span><br>
+                <div class="col-lg-2 col-lg-offset-0">
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            {{error}}
+                        </div>
+                </div>
             {% endfor %}
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td><input type="submit" value="Post!"></td>
-            <td></td>
-        </tr>
-    </table>
+        </div>
+    </div>
 </form>
 <!-- posts is a Paginate object -->
+<div class="row">
 {% for post in posts.items %}
-<p>
     {% include 'post.html' %}
-</p>
 {% endfor %}
-{% if posts.has_prev %}<a href="{{ url_for('index', page = posts.prev_num) }}"><< Newer posts</a>{% else %}<< Newer posts{% endif %} | 
-{% if posts.has_next %}<a href="{{ url_for('index', page = posts.next_num) }}">Older posts >></a>{% else %}Older posts >>{% endif %}
+</div>
+<nav>
+  <ul class="pager">
+    <li class="{% if not posts.has_prev %}disabled{% endif %}"><a href="{{ url_for('index', page = posts.prev_num) }}">Next</a></li>
+    <li class="{% if not posts.has_next %}disabled{% endif %}"><a href="{{ url_for('index', page = posts.next_num) }}">Previous</a></li>
+  </ul>
+</nav>
 {% endblock %}
