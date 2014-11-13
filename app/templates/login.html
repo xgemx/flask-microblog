@@ -21,17 +21,17 @@ function set_openid(openid, pr)
     form.elements['openid'].value = openid
 }
 </script>
-    <h1>Sign In</h1>
+    <h1>{{ _('Sign In')}}</h1>
     <form action="" method="post" name="login">
         <div class="form-group">
-            Please enter your OpenID, or select one of the providers below:
+            {{ _('Please enter your OpenID, or select one of the providers below:')}}
             <div class="row">
                  <div class="col-lg-6 col-lg-offset-0">
                     <div class="input-group">
                         {{form.hidden_tag()}}
                         {{form.openid(size=80,class="form-control")}}
                         <span class="input-group-btn">
-                            <input type="submit" class="btn btn-primary" value="Sign In">
+                            <input type="submit" class="btn btn-primary" value="{{ _('Sign In')}}">
                         </span>
                     </div>
                 </div>
@@ -45,14 +45,14 @@ function set_openid(openid, pr)
             </div>
             <div class="row">
                 <div class="col-lg-3 col-lg-offset-0">
-                    {{form.remember_me}} Remember Me
+                    {{form.remember_me}} {{ _('Remember Me')}}
                 </div>
             </div>
             <div class="row">
                 {% for error in form.errors.openid %}
                     <div class="col-lg-3 col-lg-offset-0">
                             <div class="alert alert-danger alert-dismissible" role="alert">
-                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">{{ _('Close')}}</span></button>
                                 {{error}}
                             </div>
                     </div>

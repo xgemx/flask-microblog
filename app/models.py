@@ -1,6 +1,7 @@
 from app import db, app
 from hashlib import md5
 import flask.ext.whooshalchemy as whooshalchemy
+import re
 
 ROLE_USER = 0
 ROLE_ADMIN = 1
@@ -36,6 +37,10 @@ class User(db.Model):
                 break
             version += 1
         return new_nickname
+    
+    @staticmethod
+    def make_valid_nickname(nickname):
+        return re.sub('[^a-zA-Z0-9_\.]', '', nickname)
     
     def avatar(self, size):
         return 'http://www.gravatar.com/avatar/' + md5(self.email).hexdigest() + '?d=mm&s=' + str(size)

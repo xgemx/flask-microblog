@@ -2,18 +2,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Hi, {{g.user.nickname}}!</h1>
+<h1>{{ _('Hi,')}} {{g.user.nickname}}!</h1>
 <form action="" method="post" name="post">
     {{form.hidden_tag()}}
     <div class="form-group">
-        Say something:
+        {{ _('Say something:')}}
         <div class="row">
             <div class="col-lg-6 col-lg-offset-0">
                 <div class="input-group">
                     {{form.hidden_tag()}}
                     {{ form.post(size = 30, maxlength = 140,class="form-control") }}
                     <span class="input-group-btn">
-                        <input type="submit" class="btn btn-primary" value="Post">
+                        <input type="submit" class="btn btn-primary" value="{{ _('Post')}}">
                     </span>
                 </div>
             </div>               
@@ -36,8 +36,8 @@
 </div>
 <nav>
   <ul class="pager">
-    <li class="{% if not posts.has_prev %}disabled{% endif %}"><a href="{{ url_for('index', page = posts.prev_num) }}">Next</a></li>
-    <li class="{% if not posts.has_next %}disabled{% endif %}"><a href="{{ url_for('index', page = posts.next_num) }}">Previous</a></li>
+    <li class="{% if not posts.has_prev %}disabled{% endif %}"><a href="{{ url_for('index', page = posts.prev_num) }}">{{ _('Next')}}</a></li>
+    <li class="{% if not posts.has_next %}disabled{% endif %}"><a href="{{ url_for('index', page = posts.next_num) }}">{{ _('Previous')}}</a></li>
   </ul>
 </nav>
 {% endblock %}

@@ -12,7 +12,16 @@ lm = LoginManager()
 lm.init_app(app)
 lm.login_view = 'login'
 oid = OpenID(app, os.path.join(basedir, 'tmp'))
-    
+
+from momentjs import momentjs
+app.jinja_env.globals['momentjs'] = momentjs
+
+from flask.ext.babel import Babel
+babel = Babel(app)
+
+from flask.ext.babel import lazy_gettext
+lm.login_message = lazy_gettext('Please log in to access this page.')
+
 from flask.ext.mail import Mail
 
 mail = Mail(app)
@@ -38,6 +47,3 @@ if not app.debug:
     file_handler.setLevel(logging.INFO)
     app.logger.addHandler(file_handler)
     app.logger.info('microblog startup')
-
-from momentjs import momentjs
-app.jinja_env.globals['momentjs'] = momentjs
