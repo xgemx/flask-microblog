@@ -2,7 +2,7 @@
     <div class="thumbnail">
         <img src="{{post.author.avatar(150)}}">
         <div class="caption">
-            <a href="/user/{{post.author.nickname}}">{{post.author.nickname}}</a> says:
+            <a href="/user/{{post.author.nickname}}">{{post.author.nickname}}</a> said {{momentjs(post.timestamp).fromNow()}}:
             <p>{{post.body}}</p>
         </div>
     </div>
