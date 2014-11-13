@@ -12,6 +12,10 @@ lm = LoginManager()
 lm.init_app(app)
 lm.login_view = 'login'
 oid = OpenID(app, os.path.join(basedir, 'tmp'))
+    
+from flask.ext.mail import Mail
+
+mail = Mail(app)
 
 from momentjs import momentjs
 app.jinja_env.globals['momentjs'] = momentjs
@@ -21,10 +25,6 @@ babel = Babel(app)
 
 from flask.ext.babel import lazy_gettext
 lm.login_message = lazy_gettext('Please log in to access this page.')
-
-from flask.ext.mail import Mail
-
-mail = Mail(app)
 
 from app import views, models
 

@@ -3,7 +3,17 @@
         <img src="{{post.author.avatar(150)}}">
         <div class="caption">
             <a href="/user/{{post.author.nickname}}">{{post.author.nickname}}</a> {{ _('said')}} {{momentjs(post.timestamp).fromNow()}}:
-            <p>{{post.body}}</p>
+            <p><strong><span id="post{{post.id}}">{{post.body}}</span></strong></p>
+            {% if post.language != None and post.language != '' and post.language != g.locale %}
+                <div>
+                    <span id="translation{{post.id}}">
+                        <a href="javascript:translate('{{post.language}}', '{{g.locale}}', '#post{{post.id}}', '#translation{{post.id}}', '#loading{{post.id}}');">
+                            {{ _('Translate') }}
+                        </a>
+                    </span>
+                </div>
+                <img id="loading{{post.id}}" style="display: none" src="/static/img/loading.gif">
+            {% endif %}
         </div>
     </div>
 </div>

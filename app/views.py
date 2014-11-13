@@ -7,6 +7,11 @@ from models import User, ROLE_USER, ROLE_ADMIN, Post
 from datetime import datetime
 from config import POSTS_PER_PAGE, MAX_SEARCH_RESULTS
 from emails import follower_notification
+from guess_language import guessLanguage
+from flask.ext.babel import gettext
+
+from app import babel
+from config import LANGUAGES
 
 @lm.user_loader
 def load_user(id):
@@ -20,10 +25,16 @@ def load_user(id):
 def index(page = 1):
     form = PostForm()
     if form.validate_on_submit():
-        post = Post(body = form.post.data, timestamp = datetime.utcnow(), author = g.user)
+        language = guessLanguage(form.post.data)
+        if language == 'UNKNOWN' or len(language) > 5:
+            language = ''
+        post = Post(body = form.post.data, 
+            timestamp = datetime.utcnow(), 
+            author = g.user, 
+            language = language)
         db.session.add(post)
         db.session.commit()
-        flash(gettext('Your post is now live!', 'success'))
+        flash(gettext('Your post is now live!'))
         return redirect(url_for('index'))
     posts = g.user.followed_posts().paginate(page, POSTS_PER_PAGE, False)
     return render_template('index.html',
@@ -180,9 +191,18 @@ def search_results(query):
         results = results)
 
 
-from app import babel
-from config import LANGUAGES
-
 @babel.localeselector
 def get_locale():
     return "ru" #request.accept_languages.best_match(LANGUAGES.keys())
+
+from flask import jsonify
+from translate import microsoft_translate
+
+@app.route('/translate', methods = ['POST'])
+@login_required
+def translate():
+    return jsonify({ 
+        'text': microsoft_translate(
+            request.form['text'], 
+            request.form['sourceLang'], 
+            request.form['destLang']) })

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -29,3 +30,12 @@ POSTS_PER_PAGE = 3
 WHOOSH_BASE = os.path.join(basedir, 'search.db')
 
 MAX_SEARCH_RESULTS = 50
+
+# available languages
+LANGUAGES = {
+    'en': 'English',
+    'ru': 'Русский'
+}
+
+MS_TRANSLATOR_CLIENT_ID = '' # укажите здесь свой app id
+MS_TRANSLATOR_CLIENT_SECRET = '' # а здесь secret
