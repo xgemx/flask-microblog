@@ -11,8 +11,7 @@ OPENID_PROVIDERS = [
     { 'name': 'Google', 'url': 'https://plus.google.com/<id>' },
     { 'name': 'Yahoo', 'url': 'https://me.yahoo.com' },
     { 'name': 'AOL', 'url': 'http://openid.aol.com/<username>' },
-    { 'name': 'Flickr', 'url': 'http://www.flickr.com/<username>' },
-    { 'name': 'MyOpenID', 'url': 'https://www.myopenid.com' }]
+    { 'name': 'Flickr', 'url': 'http://www.flickr.com/<username>' }]
 
 
 # mail server settings
@@ -26,3 +25,7 @@ ADMINS = ['you@example.com']
 
 # pagination
 POSTS_PER_PAGE = 3
+
+WHOOSH_BASE = os.path.join(basedir, 'search.db')
+
+MAX_SEARCH_RESULTS = 50
